@@ -68,15 +68,6 @@ def tokenize(text):
     return text.lower()
 
 
-if __name__ == '__main__':
-    infname = sys.argv[1]
-    outfname = sys.argv[2]
-
-    with open(infname) as inf:
-        with open(outfname, 'w') as outf:
-            for idx, l in enumerate(inf):
-                cleaned_tweet = tokenize(json.loads(l)['text'].encode('utf8'))
-                outf.write("{}\n".format(cleaned_tweet))
-
-                if (idx + 1) % 1000 == 0:
-                    print 'processed {} tweets'.format(idx)
+def tokenize_tweets(tweets):
+    for tweet in tweets:
+        yield tokenize(tweet)
