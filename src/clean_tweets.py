@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from preprocess_twitter import tokenize
 import sys
 
@@ -13,4 +15,4 @@ if __name__ == '__main__':
                 outf.write("{}\n".format(cleaned_tweet))
 
                 if (idx + 1) % 1000 == 0:
-                    print 'processed {} tweets'.format(idx)
+                    print('processed {} tweets'.format(idx))

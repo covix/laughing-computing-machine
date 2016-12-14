@@ -23,9 +23,9 @@ classifier = ft.supervised(train_file, output, dim=dim, lr=lr, epoch=epoch,
 
 # Test the classifier
 result = classifier.test(test_file)
-print 'P@1:', result.precision
-print 'R@1:', result.recall
-print 'Number of examples:', result.nexamples
+print('P@1:', result.precision)
+print('R@1:', result.recall)
+print('Number of examples:', result.nexamples)
 
 
 # Predict some text
@@ -38,4 +38,4 @@ texts = ['birchas chaim , yeshiva birchas chaim is a orthodox jewish mesivta \
         classroom teachers ( on a fte basis ) for a student-teacher ratio of \
         11 . 5 1 .']
 labels = classifier.predict(texts)
-print labels
+print(labels)
