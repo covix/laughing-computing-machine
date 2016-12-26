@@ -89,7 +89,7 @@ if __name__ == '__main__':
     for train_index, test_index in skf.split(X, y):
         print('X/y: {}/{}'.format(len(train_index), len(test_index)))
         lines_train, lines_test = lines[train_index], lines[test_index]
-        clf = train_model(lines_train, epoch=1, remove_after=True)
+        clf = train_model(lines_train, remove_after=True)
         result = test_model(lines_train, clf, remove_after=True)
 
         precisions.append(result.precision)
@@ -108,4 +108,4 @@ if __name__ == '__main__':
     print('R@1: {:.2f} (+/- {:.2f})'.format(recalls.mean(), recalls.std() * 2))
 
     print("\nTraining final model")
-    train_model(lines)
+    train_model(lines, output='model/{}'.format(os.path.basename(os.path.splitext(infname)[0])))

@@ -14,6 +14,7 @@ http://nlp.stanford.edu/projects/glove/preprocess-twitter.rb
 import sys
 import re
 import json
+import utils
 
 _FLAGS = re.MULTILINE | re.DOTALL
 
@@ -35,6 +36,7 @@ def _allcaps(text):
 
 
 def tokenize(text):
+    # TODO split punctuations
     text = (x.strip() for x in text.splitlines())
     text = ' '.join((x for x in text if x != ''))
 
@@ -71,3 +73,22 @@ def tokenize(text):
 def tokenize_tweets(tweets):
     for tweet in tweets:
         yield tokenize(tweet)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print("Usage: python preprocess_twitter.py <filename> <label>")
+        sys.exit()
+
+    filename = sys.argv[1]
+    label = bool(sys.argv[2])
+
+    tweets = utils.load_ds(filename, label)
+    for tweet in tweets:
+        if label:
+            label, text = tweet
+        else:
+            label = ''
+            text = tweet
+
+        print('{}{}'.format(label, tokenize(text)))
