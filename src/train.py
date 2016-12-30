@@ -42,7 +42,7 @@ def save_file(lines, filename):
 
 def train_model(lines, filename='/tmp/model.train',
                 output='model/model', dim=10, lr=0.1, epoch=6,
-                min_count=1, word_ngrams=2, bucket=10000000, thread=4, silent=1,
+                min_count=1, word_ngrams=1, bucket=10000000, thread=4, silent=1,
                 label_prefix='__label__', remove_after=False):
     save_file(lines, filename)
 
