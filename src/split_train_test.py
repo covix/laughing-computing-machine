@@ -14,7 +14,7 @@ if __name__ == '__main__':
     test_fname = basename + '.test'
 
     with open(infname) as f:
-        lines = [i.strip() for i in f.readlines()]
+        lines = f.readlines()
 
     shuffle(lines)
 
@@ -22,8 +22,8 @@ if __name__ == '__main__':
 
     with open(train_fname, 'w') as f:
         for i in lines[:n_train_lines]:
-            f.write('{}\n'.format(i))
+            f.write(i)
 
     with open(test_fname, 'w') as f:
         for i in lines[n_train_lines:]:
-            f.write('{}\n'.format(i))
+            f.write(i)

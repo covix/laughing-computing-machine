@@ -16,6 +16,6 @@ if __name__ == '__main__':
 
     classifier = ft.load_model(model_fname)
     result = classifier.test(test_fname)
-    print('P@1:', result.precision)
-    print('R@1:', result.recall)
+    print('P@1: {:.2f}'.format(result.precision * 100))
+    print('R@1: {:.2f}'.format(result.recall * 100))
     print('Number of examples:', result.nexamples)

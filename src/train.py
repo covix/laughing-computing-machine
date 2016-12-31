@@ -41,8 +41,8 @@ def save_file(lines, filename):
 
 
 def train_model(lines, filename='/tmp/model.train',
-                output='model/model', dim=10, lr=0.1, epoch=6,
-                min_count=1, word_ngrams=1, bucket=10000000, thread=4, silent=1,
+                output='model/model', dim=100, lr=0.1, epoch=6,
+                min_count=1, word_ngrams=1, bucket=1000000, thread=4, silent=1,
                 label_prefix='__label__', remove_after=False):
     save_file(lines, filename)
 
@@ -95,17 +95,19 @@ if __name__ == '__main__':
         precisions.append(result.precision)
         recalls.append(result.recall)
 
-        print('P@1:', result.precision)
-        print('R@1:', result.recall)
+        print('P@1: {:.2f}'.format(result.precision * 100))
+        print('R@1: {:.2f}'.format(result.recall * 100))
         # print('Number of examples:', result.nexamples)
         print()
 
     precisions = np.array(precisions)
     recalls = np.array(recalls)
 
-    print('P@1: {:.2f} (+/- {:.2f})'.format(precisions.mean(),
-                                            precisions.std() * 2))
-    print('R@1: {:.2f} (+/- {:.2f})'.format(recalls.mean(), recalls.std() * 2))
+    print('Mean P@1: {:.2f} (+/- {:.2f})'.format(precisions.mean() * 100,
+                                                 precisions.std() * 2 * 100))
+    print('Mean R@1: {:.2f} (+/- {:.2f})'.format(recalls.mean() * 100,
+                                                 recalls.std() * 2 * 100))
 
     print("\nTraining final model")
-    train_model(lines, output='model/{}'.format(os.path.basename(os.path.splitext(infname)[0])))
+    train_model(
+        lines, output='model/{}'.format(os.path.basename(os.path.splitext(infname)[0])))
